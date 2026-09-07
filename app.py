@@ -1,3 +1,7 @@
+import os
+# 兜底安装依赖
+os.system('pip install flask langchain langchain-ollama')
+
 from flask import Flask, render_template, request, jsonify
 from langchain_ollama import ChatOllama
 from langchain.tools import tool
@@ -15,11 +19,16 @@ def price_quote(package: str = "基础", extra_photos: int = 0, extra_outfits: i
     outfit_fee = extra_outfits * 150
     total = (base_price + photo_fee + outfit_fee) * discount
     return (
-        f"📋 套餐：{package}（¥{base_price}）\n"
-        f"➕ 加修照片：{extra_photos}张 × ¥30 = ¥{photo_fee}\n"
-        f"➕ 加套服装：{extra_outfits}套 × ¥150 = ¥{outfit_fee}\n"
-        f"💰 折扣：{int((1-discount)*100)}% off\n"
-        f"━━━━━━━━━━━━━━━\n"
+        f"📋 套餐：{package}（¥{base_price}）
+"
+        f"➕ 加修照片：{extra_photos}张 × ¥30 = ¥{photo_fee}
+"
+        f"➕ 加套服装：{extra_outfits}套 × ¥150 = ¥{outfit_fee}
+"
+        f"💰 折扣：{int((1-discount)*100)}% off
+"
+        f"━━━━━━━━━━━━━━━
+"
         f"🧾 合计：¥{total:.0f}"
     )
 
@@ -45,8 +54,10 @@ def check_schedule(query_date: str = "今天") -> str:
         return f"📅 {date_str_output}（{weekday_str}）❌ 已约满。"
     else:
         slots = ["09:00-11:00", "13:00-15:00", "15:30-17:30"]
-        slots_str = "\n".join([f"  ⏰ {slot}" for slot in slots])
-        return f"📅 {date_str_output}（{weekday_str}）✅ 有空闲\n{slots_str}"
+        slots_str = "
+".join([f"  ⏰ {slot}" for slot in slots])
+        return f"📅 {date_str_output}（{weekday_str}）✅ 有空闲
+{slots_str}"
 
 # ---------- 初始化模型 ----------
 llm = ChatOllama(model="qwen2.5:3b", temperature=0)
@@ -55,12 +66,15 @@ llm_with_tools = llm.bind_tools(tools)
 
 system_message = SystemMessage(content="你是一家妆造写真工作室的客服助手。你有两个工具：price_quote和check_schedule。根据用户问题选择合适的工具，准确填写参数。")
 
-# 存储每个会话的历史
 conversations = {}
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    # 如果没有前端页面，先返回简单文字避免报错
+    try:
+        return render_template("index.html")
+    except Exception:
+        return "妆造Agent服务已启动！"
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -87,14 +101,19 @@ def chat():
             else:
                 result = f"未知工具：{tool_name}"
             outputs.append(result)
-        reply = "\n\n".join(outputs)
+        reply = "
+
+".join(outputs)
     else:
         reply = response.content
 
-    # 更新历史
     chat_history.append(HumanMessage(content=user_input))
     chat_history.append(SystemMessage(content=reply))
     conversations[session_id] = chat_history
 
     return jsonify({"reply": reply})
 
+# ---------- 启动配置（适配 Railway 动态端口） ----------
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
