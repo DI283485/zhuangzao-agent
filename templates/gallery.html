@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作品集 · 栖帧 | 摄影</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Serif SC', 'Songti SC', serif; background: #050505; color: #d4d4d4; font-weight: 300; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 22px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(5,5,5,0.93); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(200,168,118,0.06); }
+.nav .logo { font-size: 1.3rem; color: #c8a876; letter-spacing: 8px; font-weight: 300; }
+.nav .menu a { color: #888; text-decoration: none; margin-left: 36px; font-size: 0.8rem; letter-spacing: 4px; transition: color 0.3s; }
+.nav .menu a:hover { color: #c8a876; }
+.page-header { padding: 130px 20px 30px; text-align: center; }
+.page-header h1 { font-size: 2rem; color: #c8a876; font-weight: 300; letter-spacing: 14px; margin-bottom: 8px; }
+.page-header p { color: #666; font-size: 0.8rem; letter-spacing: 6px; }
+.gallery-duo { display: flex; width: 98vw; margin: 0 auto 70px; gap: 4px; padding: 0 10px; }
+.col { flex: 1; position: relative; overflow: hidden; background: #0a0a0a; border: 1px solid #1a1a1a; aspect-ratio: 3/4; transition: border-color 0.4s; }
+.col:hover { border-color: #c8a876; }
+.col .slides { position: relative; width: 100%; height: 100%; }
+.col .slides img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease-in-out; }
+.col .slides img.active { opacity: 1; }
+.footer { text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.02); color: #444; font-size: 0.68rem; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="logo">栖帧</div>
+  <div class="menu">
+    <a href="/">首页</a>
+    <a href="/gallery">作品集</a>
+    <a href="/pricing">服务与价格</a>
+  </div>
+</div>
+<div class="page-header">
+  <h1>帧 影 留 痕</h1>
+  <p>每一帧，都是时光的标本</p>
+</div>
+<div class="gallery-duo">
+  <div class="col" id="col-left">
+    <div class="slides">
+      <img src="{{ url_for('static', filename='images/GF1.jpg') }}" class="active" alt="">
+      <img src="{{ url_for('static', filename='images/GF2.jpg') }}" alt="">
+    </div>
+  </div>
+  <div class="col" id="col-right">
+    <div class="slides">
+      <img src="{{ url_for('static', filename='images/FS1.jpg') }}" class="active" alt="">
+      <img src="{{ url_for('static', filename='images/FS2.jpg') }}" alt="">
+    </div>
+  </div>
+</div>
+<div class="footer">© 2026 栖帧 | 摄影 · 定格你的帧藏</div>
+<script>
+const intervals = {};
+function startAutoSlide(colId) {
+  const col = document.getElementById(colId);
+  const imgs = col.querySelectorAll('.slides img');
+  let current = 0;
+  imgs[current].classList.add('active');
+  intervals[colId] = setInterval(() => {
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 3500);
+}
+startAutoSlide('col-left');
+startAutoSlide('col-right');
+</script>
+</body>
+</html>

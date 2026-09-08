@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务与价格 · 栖帧 | 摄影</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif; background: #0a0a0a; color: #d4d4d4; line-height: 1.8; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 56px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(212,175,110,0.06); }
+.nav .logo { font-size: 1.3rem; color: #d4af6e; letter-spacing: 6px; font-weight: 300; }
+.nav .menu a { color: #999; text-decoration: none; margin-left: 34px; font-size: 0.82rem; letter-spacing: 3px; transition: all 0.3s; position: relative; }
+.nav .menu a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #d4af6e; transition: width 0.3s; }
+.nav .menu a:hover { color: #d4af6e; }
+.nav .menu a:hover::after { width: 100%; }
+.page-header { padding: 160px 20px 50px; text-align: center; }
+.page-header h1 { font-size: 2.4rem; color: #ececec; font-weight: 300; letter-spacing: 12px; margin-bottom: 10px; }
+.page-header p { color: #888; font-size: 0.86rem; letter-spacing: 6px; }
+.classic-divider { text-align: center; margin: 20px 0 40px; }
+.classic-divider span { display: inline-block; width: 120px; height: 1px; background: #d4af6e; vertical-align: middle; }
+.classic-divider i { color: #d4af6e; font-style: normal; letter-spacing: 6px; font-size: 0.8rem; padding: 0 16px; }
+.plans { max-width: 1020px; margin: 0 auto 60px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
+.plan { background: #111; border: 1px solid #2a221a; padding: 44px 30px; text-align: center; transition: all 0.4s; position: relative; }
+.plan:hover { border-color: #d4af6e; transform: translateY(-6px); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+.plan.hot { border-color: #d4af6e; }
+.plan.hot::before { content: '推 荐'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #d4af6e; color: #0a0a0a; padding: 4px 32px; font-size: 0.63rem; letter-spacing: 6px; font-weight: 400; }
+.plan h3 { font-size: 1.2rem; color: #e0d6c8; font-weight: 400; letter-spacing: 6px; margin-bottom: 6px; }
+.plan .price { font-size: 2.8rem; color: #d4af6e; font-weight: 300; margin: 18px 0; letter-spacing: 4px; }
+.plan .price small { font-size: 0.8rem; color: #665544; font-weight: 300; }
+.plan ul { list-style: none; padding: 0; margin: 24px 0; }
+.plan ul li { padding: 10px 0; color: #bbb; font-size: 0.85rem; border-bottom: 1px solid rgba(210,180,140,0.06); letter-spacing: 2px; }
+.plan ul li:last-child { border-bottom: none; }
+.plan .btn { display: inline-block; margin-top: 20px; padding: 12px 40px; border: 1px solid #d4af6e; color: #d4af6e; text-decoration: none; letter-spacing: 6px; font-size: 0.72rem; transition: all 0.4s; position: relative; overflow: hidden; }
+.plan .btn::before { content: ''; position: absolute; inset: 0; background: #d4af6e; transform: translateY(100%); transition: transform 0.4s; z-index: -1; }
+.plan .btn:hover { color: #0a0a0a; }
+.plan .btn:hover::before { transform: translateY(0); }
+.info-section { max-width: 640px; margin: 0 auto 36px; padding: 0 24px; text-align: center; }
+.info-section h3 { color: #d4af6e; font-size: 0.96rem; font-weight: 400; letter-spacing: 6px; margin-bottom: 16px; display: inline-block; border-bottom: 1px solid #d4af6e; padding-bottom: 4px; }
+.info-section p, .info-section li { color: #999; font-size: 0.82rem; line-height: 2.2; letter-spacing: 2px; }
+.info-section ul { padding-left: 0; list-style: none; }
+.info-section ul li::before { content: '◇ '; color: #d4af6e; }
+.contact-classic { max-width: 480px; margin: 0 auto 50px; padding: 30px 20px; text-align: center; border: 1px solid #2a221a; background: #0d0d0d; }
+.contact-classic h3 { color: #d4af6e; font-size: 1rem; font-weight: 400; letter-spacing: 8px; margin-bottom: 20px; display: inline-block; border-bottom: 1px solid #d4af6e; padding-bottom: 6px; }
+.contact-classic .xiaohongshu { font-size: 1.1rem; color: #dcdcdc; letter-spacing: 4px; }
+.footer { text-align: center; padding: 32px; border-top: 1px solid rgba(255,255,255,0.03); color: #444; font-size: 0.68rem; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="logo">栖帧</div>
+  <div class="menu">
+    <a href="/">首页</a>
+    <a href="/gallery">作品集</a>
+    <a href="/pricing">服务与价格</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <h1>服 务 与 价 格</h1>
+  <p>透明定价 · 专注品质</p>
+</div>
+
+<div class="classic-divider"><span></span><i>· 帧 · 选 ·</i><span></span></div>
+
+<div class="plans">
+  <div class="plan">
+    <h3>基础 · 帧藏</h3>
+    <div class="price">¥299 <small>/套</small></div>
+    <ul>
+      <li>妆造 1 组 · 服装 1 套</li>
+      <li>精修6张</li>
+      <li>交付原片 10 张</li>
+    </ul>
+    <a href="#" class="btn">预 约</a>
+  </div>
+  <div class="plan hot">
+    <h3>精致 · 帧选</h3>
+    <div class="price">¥599 <small>/套</small></div>
+    <ul>
+      <li>妆造 2 组 · 服装 2 套</li>
+      <li>精修10张</li>
+      <li>交付原片 20 张</li>
+      <li>定制相册一本</li>
+    </ul>
+    <a href="#" class="btn">预 约</a>
+  </div>
+  <div class="plan">
+    <h3>尊享 · 帧品</h3>
+    <div class="price">¥999 <small>/套</small></div>
+    <ul>
+      <li>妆造 3 组 · 服装 3 套</li>
+      <li>精修10张</li>  
+      <li>豪华相册 + 摆台</li>
+      <li>拍摄花絮短片</li>
+    </ul>
+    <a href="#" class="btn">预 约</a>
+  </div>
+</div>
+
+<div class="info-section">
+  <h3>加拍 / 加套</h3>
+  <p>加拍原片：30元/张 ｜ 加套妆造服装：150元/套</p>
+</div>
+
+<div class="info-section">
+  <h3>预约须知</h3>
+  <ul>
+    <li>请提前 3-7 天预约。</li>
+    <li>预约需支付定金，余款拍摄当天付清。</li> 
+  </ul>
+</div>
+
+<div class="contact-classic">
+  <h3>联 系 我 们</h3>
+  <div class="xiaohongshu">小红书：栖帧|北京摄影</div>
+</div>
+
+<div class="footer">© 2026 栖帧 | 摄影 · 定格你的帧藏</div>
+</body>
+</html>
